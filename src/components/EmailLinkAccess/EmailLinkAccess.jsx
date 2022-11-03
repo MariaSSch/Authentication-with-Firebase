@@ -1,14 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { getAuth, sendSignInLinkToEmail } from 'firebase/auth';
-import { useState } from 'react'
-//import { useAuth } from 'hooks/use-auth'
-
-import Button from 'UI/Button/Button';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from 'UI/Button/Button';
+import s from "../Form/Form.module.sass";
 
 export default function EmailLinkAccess() {
     const [emailLink, setEmailLink] = useState();
-  //const {isAuth, email} = useAuth();
   const navigate = useNavigate();
   
   const handleGetLink = (email) => {
@@ -28,14 +26,20 @@ export default function EmailLinkAccess() {
   }
 
   return (
-    <form onSubmit = {(e) => {e.preventDefault(); handleGetLink(emailLink)}}>
-        <input 
-          type="email" 
-          value={emailLink}
-          onChange={e => setEmailLink(e.target.value)} 
-          placeholder="email"
-        />
-        <Button>Get Link</Button>
+    <form  className={s.form} onSubmit = {(e) => {e.preventDefault(); handleGetLink(emailLink)}}>
+       <div className={s.field_container}>
+        <label style={{width: "100%", marginRight: 0}}>
+            <p>Email</p>
+            <input 
+              type="email" 
+              autoComplete="username"
+              value={emailLink}
+              onChange={e => setEmailLink(e.target.value)} 
+              placeholder="email"
+            />
+          </label>
+        </div>
+          <Button>Get Link</Button>
     </form>
   )
 }

@@ -1,11 +1,13 @@
 import React from 'react';
 import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import { useDispatch } from 'react-redux';
-import { user_get_out, user_get_in } from "store/reducers/userReducer";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { user_get_out, user_get_in } from "store/reducers/userReducer";
 import { useAuth } from 'hooks/use-auth';
 import Button from 'UI/Button/Button';
+import s from "./pageStyle.module.sass"
+
 
 export default function HomePage() {
   const {isAuth, email} = useAuth();
@@ -41,8 +43,8 @@ export default function HomePage() {
   return isAuth ? (
     
       <div>
-        <h1>Welcome!</h1>
-        <Button onClick={()=>dispatch(user_get_out())}>Log out from {email}</Button>
+        <h1   className={s.pageHeader}>Welcome!</h1>
+        <Button style={{width: "50%"}} onClick={()=>dispatch(user_get_out())}>Log out from {email}</Button>
       </div>
   )
       :
